@@ -1,0 +1,45 @@
+.form {
+    &__wrap {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+        position: relative;
+
+        &::after {
+            content: "";
+            width: 40%;
+            height: 4px;
+            display: table;
+            background-color: plum;
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    &__input {
+        border: none;
+        outline: none;
+        padding: 2rem 1rem;
+        font-size: 2rem;
+        background-color: cornflowerblue;
+        color: coral;
+
+        &::placeholder {
+            color: coral;
+        }
+    }
+
+    &__btn {
+        border: none;
+        background-color: white;
+        color: plum;
+        cursor: pointer;
+        background-color: cornflowerblue;
+
+        &:hover {
+            color: coral;
+        }
+    }
+}
