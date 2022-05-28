@@ -8,6 +8,24 @@ const sky = document.querySelector('.content__sky');
 const icon = document.querySelector('.content__sun');
 const KEY = '25c0f427c1b94f7ea55225510222705';
 
+const getInitialWeather = async function(lat,lng) {
+    const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${lat},${lng}`);
+    const data = await response.json();
+    setWeather(data)
+}
+
+const preparedData = function() {
+    navigator.geolocation.getCurrentPosition((pos) => {
+        const latitude = pos.coords.latitude;
+        const longitude = pos.coords.longitude;
+        getInitialWeather(latitude,longitude);
+    }, () => {
+        const latitude = 53.15;
+        const longitude = 16.65;
+        getInitialWeather(latitude,longitude);
+    });
+}
+
 const getDayName = function(string) {
     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(string)
@@ -21,7 +39,7 @@ const getDate = function(string) {
 }
 
 const setWeather = function(data) {
-    let time = data.location.localtime.split(' ').splice(1,2);
+    const time = data.location.localtime.split(' ').splice(1,2);
     const [dayName] = data.location.localtime.split(' ').splice(0,1);
     cityAndDate.textContent = `${data.location.name}, ${getDate(dayName)}`;
     weekday.textContent = `${getDayName(dayName)}`;
@@ -48,3 +66,5 @@ form.addEventListener('submit', function(e) {
     e.preventDefault();
     checkInput();
 })
+
+preparedData();
