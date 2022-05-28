@@ -1,0 +1,31 @@
+.forecast {
+    margin-top: 1.8rem;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+
+    &__header {
+        font-size: 2.2rem;
+        color: whitesmoke;
+    }
+
+    &__week {
+        list-style: none;
+        display: grid;
+        margin-top: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        background-color: plum;
+    }
+
+    &__day {
+        font-size: 1.8rem;
+        border: 1px solid cornflowerblue;
+        color: whitesmoke;
+    }
+
+    &__day-name {}
+
+    &__temp {}
+
+    &__icon {}
+}

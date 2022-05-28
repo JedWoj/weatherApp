@@ -11,7 +11,7 @@ const KEY = '25c0f427c1b94f7ea55225510222705';
 const getInitialWeather = async function(lat,lng) {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${lat},${lng}`);
     const data = await response.json();
-    setWeather(data)
+    setWeather(data);
 }
 
 const preparedData = function() {

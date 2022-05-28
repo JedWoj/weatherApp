@@ -18,10 +18,12 @@ html {
   text-align: center;
   color: whitesmoke;
   padding: 2rem;
+  font-size: 1.4rem;
+  width: 100%;
 }
 
 .content {
-  margin-top: 15vh;
+  margin-top: 5vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -31,11 +33,15 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .content__current {
   border: 5px solid plum;
-  width: 60%;
+  width: 80%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -77,7 +83,8 @@ html {
 }
 
 .content__city, .content__time, .content__temp, .content__sky, .content__day {
-  font-size: 2rem;
+  font-size: 1.7rem;
+  color: whitesmoke;
 }
 
 .content__sky {
@@ -97,7 +104,7 @@ html {
 
 .form__wrap::after {
   content: "";
-  width: 40%;
+  width: 80%;
   height: 4px;
   display: table;
   background-color: plum;
@@ -143,5 +150,33 @@ html {
 
 .form__btn:hover {
   color: coral;
+}
+
+.forecast {
+  margin-top: 1.8rem;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.forecast__header {
+  font-size: 2.2rem;
+  color: whitesmoke;
+}
+
+.forecast__week {
+  list-style: none;
+  display: -ms-grid;
+  display: grid;
+  margin-top: 1rem;
+  -ms-grid-columns: (minmax(10rem, 1fr))[auto-fit];
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  background-color: plum;
+}
+
+.forecast__day {
+  font-size: 1.8rem;
+  border: 1px solid cornflowerblue;
+  color: whitesmoke;
 }
 /*# sourceMappingURL=main.css.map */
