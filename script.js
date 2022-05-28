@@ -10,6 +10,13 @@ const forecastDays = [...document.querySelectorAll('.forecast__day')];
 const KEY = '25c0f427c1b94f7ea55225510222705';
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+const getInitialForecast = async function(lat,lng) {
+    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${lat},${lng}&days=7`);
+    const data = await response.json();
+    setForecastTiles(data);
+    console.log(data,'lol')
+}
+
 const weekDay = function(string) {
     const date = new Date(string);
     return `${days[date.getDay()]}`;
@@ -42,6 +49,7 @@ const preparedData = function() {
         const latitude = pos.coords.latitude;
         const longitude = pos.coords.longitude;
         getInitialWeather(latitude,longitude);
+        getInitialForecast(latitude,longitude);
     }, () => {
         const latitude = 53.15;
         const longitude = 16.65;
@@ -88,6 +96,6 @@ const checkInput = function() {
 form.addEventListener('submit', function(e) {
     e.preventDefault();
     checkInput();
-})
+});
 
 preparedData();
