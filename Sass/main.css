@@ -78,7 +78,7 @@ html {
           align-items: center;
 }
 
-.content__city, .content__time, .content__temp, .content__sky {
+.content__city, .content__time, .content__temp, .content__sky, .content__day {
   font-size: 2rem;
 }
 

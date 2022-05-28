@@ -35,13 +35,10 @@
     &__city,
     &__time,
     &__temp,
-    &__sky {
+    &__sky,
+    &__day {
         font-size: 2rem;
     }
-
-    &__time {}
-
-    &__temp {}
 
     &__sky {
         margin-bottom: 2rem;
