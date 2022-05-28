@@ -6,7 +6,30 @@ const hour = document.querySelector('.content__time');
 const temperature = document.querySelector('.content__temp');
 const sky = document.querySelector('.content__sky');
 const icon = document.querySelector('.content__sun');
+const forecastDays = [...document.querySelectorAll('.forecast__day')];
 const KEY = '25c0f427c1b94f7ea55225510222705';
+const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const weekDay = function(string) {
+    const date = new Date(string);
+    return `${days[date.getDay()]}`;
+}
+
+const setForecastTiles = function(data) {
+    forecastDays.forEach((day,index) =>  {
+        const date = data.forecast.forecastday[index].date;
+        day.querySelector('.forecast__day-name').textContent = weekDay(date);
+        day.querySelector('.forecast__temp').textContent = `${data.forecast.forecastday[index].day.maxtemp_c} C`;
+        day.querySelector('.forecast__icon').src = data.forecast.forecastday[index].day.condition.icon;
+    });
+    console.log(data)
+}
+
+const getForecast = async function(location) {
+    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${location}&days=7`);
+    const data = await response.json();
+    setForecastTiles(data);
+}
 
 const getInitialWeather = async function(lat,lng) {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${lat},${lng}`);
@@ -27,7 +50,6 @@ const preparedData = function() {
 }
 
 const getDayName = function(string) {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(string)
     return days[date.getDay()];
 }
@@ -60,6 +82,7 @@ const checkInput = function() {
     const value = input.value;
     if(!value) return 
     getWeather(value);
+    getForecast(value);
 }
 
 form.addEventListener('submit', function(e) {
