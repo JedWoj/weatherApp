@@ -56,8 +56,6 @@ html {
 .content__sun {
   width: 10rem;
   height: 10rem;
-  background-color: yellow;
-  border-radius: 50%;
   margin-top: 2rem;
 }
 
