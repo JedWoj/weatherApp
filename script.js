@@ -14,7 +14,6 @@ const getInitialForecast = async function(lat,lng) {
     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${lat},${lng}&days=7`);
     const data = await response.json();
     setForecastTiles(data);
-    console.log(data,'lol')
 }
 
 const weekDay = function(string) {
@@ -29,7 +28,6 @@ const setForecastTiles = function(data) {
         day.querySelector('.forecast__temp').textContent = `${data.forecast.forecastday[index].day.maxtemp_c} C`;
         day.querySelector('.forecast__icon').src = data.forecast.forecastday[index].day.condition.icon;
     });
-    console.log(data)
 }
 
 const getForecast = async function(location) {
@@ -83,7 +81,6 @@ const getWeather = async function(value) {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${value}`);
     const data = await response.json();
     setWeather(data);
-    console.log(data)
 }
 
 const checkInput = function() {
