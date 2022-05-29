@@ -6,9 +6,20 @@ const hour = document.querySelector('.content__time');
 const temperature = document.querySelector('.content__temp');
 const sky = document.querySelector('.content__sky');
 const icon = document.querySelector('.content__sun');
+const errMessage = document.querySelector('.error');
 const forecastDays = [...document.querySelectorAll('.forecast__day')];
 const KEY = '25c0f427c1b94f7ea55225510222705';
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const errMessageHandler = function(boolen) {
+    if(boolen) return errMessage.classList.add('hidden');
+    errMessage.classList.remove('hidden');
+}
+
+const errorMessage = function(err) {
+    errMessage.textContent = err;
+    errMessage.classList.remove('hidden');
+}
 
 const getInitialForecast = async function(lat,lng) {
     const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${KEY}&q=${lat},${lng}&days=7`);
@@ -49,9 +60,10 @@ const userData = function() {
         getInitialWeather(latitude,longitude);
         getInitialForecast(latitude,longitude);
     }, () => {
-        const latitude = 53.15;
-        const longitude = 16.65;
+        const latitude = 53.20;
+        const longitude = 16.66;
         getInitialWeather(latitude,longitude);
+        getInitialForecast(latitude,longitude);
     });
 }
 
@@ -78,9 +90,16 @@ const setWeather = function(data) {
 }
 
 const getWeather = async function(value) {
+    try {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${value}`);
     const data = await response.json();
+    if(data.error) throw Error(data.error.message);
     setWeather(data);
+    errMessageHandler(true);
+    } catch(err) {
+        errorMessage(err);
+        errMessageHandler(false);
+    }
 }
 
 const checkInput = function() {

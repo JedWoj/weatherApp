@@ -182,4 +182,14 @@ html {
   border: 1px solid cornflowerblue;
   color: whitesmoke;
 }
+
+.error {
+  font-size: 3rem;
+  margin-top: 5vh;
+  color: blueviolet;
+}
+
+.hidden {
+  opacity: 0;
+}
 /*# sourceMappingURL=main.css.map */
