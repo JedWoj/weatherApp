@@ -42,7 +42,7 @@ const getInitialWeather = async function(lat,lng) {
     setWeather(data);
 }
 
-const preparedData = function() {
+const userData = function() {
     navigator.geolocation.getCurrentPosition((pos) => {
         const latitude = pos.coords.latitude;
         const longitude = pos.coords.longitude;
@@ -95,4 +95,4 @@ form.addEventListener('submit', function(e) {
     checkInput();
 });
 
-preparedData();
+userData();
