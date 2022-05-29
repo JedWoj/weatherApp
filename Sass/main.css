@@ -41,7 +41,7 @@ html {
 
 .content__current {
   border: 5px solid plum;
-  width: 80%;
+  width: 30rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
