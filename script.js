@@ -18,7 +18,6 @@ const errMessageHandler = function(boolen) {
 
 const errorMessage = function(err) {
     errMessage.textContent = err;
-    errMessage.classList.remove('hidden');
 }
 
 const getInitialForecast = async function(lat,lng) {
@@ -68,7 +67,7 @@ const userData = function() {
 }
 
 const getDayName = function(string) {
-    const date = new Date(string)
+    const date = new Date(string);
     return days[date.getDay()];
 }
 
