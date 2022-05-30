@@ -12,7 +12,7 @@ html {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.body {
+body {
   background-color: cornflowerblue;
 }
 
@@ -25,7 +25,7 @@ html {
   width: 100%;
 }
 
-.content {
+.weather {
   margin-top: 5vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -42,7 +42,7 @@ html {
           flex-direction: column;
 }
 
-.content__current {
+.weather__current {
   border: 5px solid plum;
   width: 30rem;
   display: -webkit-box;
@@ -62,13 +62,13 @@ html {
   border-radius: 4%;
 }
 
-.content__sun {
+.weather__sun {
   width: 10rem;
   height: 10rem;
   margin-top: 2rem;
 }
 
-.content__data {
+.weather__data {
   gap: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -85,23 +85,23 @@ html {
           align-items: center;
 }
 
-.content__city, .content__time, .content__temp, .content__sky, .content__day {
+.weather__city, .weather__time, .weather__temp, .weather__sky, .weather__day {
   font-size: 1.7rem;
   color: whitesmoke;
 }
 
-.content__sky {
+.weather__sky {
   margin-bottom: 2rem;
 }
 
-.content__box {
+.weather__box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 5rem;
 }
 
-.form__wrap {
+.search-form__wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -112,7 +112,7 @@ html {
   position: relative;
 }
 
-.form__wrap::after {
+.search-form__wrap::after {
   content: "";
   width: 80%;
   height: 4px;
@@ -125,7 +125,7 @@ html {
           transform: translateX(-50%);
 }
 
-.form__input {
+.search-form__input {
   border: none;
   outline: none;
   padding: 2rem 1rem;
@@ -134,23 +134,23 @@ html {
   color: coral;
 }
 
-.form__input::-webkit-input-placeholder {
+.search-form__input::-webkit-input-placeholder {
   color: coral;
 }
 
-.form__input:-ms-input-placeholder {
+.search-form__input:-ms-input-placeholder {
   color: coral;
 }
 
-.form__input::-ms-input-placeholder {
+.search-form__input::-ms-input-placeholder {
   color: coral;
 }
 
-.form__input::placeholder {
+.search-form__input::placeholder {
   color: coral;
 }
 
-.form__btn {
+.search-form__btn {
   border: none;
   background-color: white;
   color: plum;
@@ -158,7 +158,7 @@ html {
   background-color: cornflowerblue;
 }
 
-.form__btn:hover {
+.search-form__btn:hover {
   color: coral;
 }
 
@@ -200,26 +200,26 @@ html {
 }
 
 .hidden {
-  opacity: 0;
+  display: none;
 }
 
 @media only screen and (max-width: 50rem) {
-  .history {
+  .search-history {
     display: none;
   }
 }
 
-.history__header {
+.search-history__header {
   font-size: 2.2rem;
   color: whitesmoke;
   margin-bottom: 1rem;
 }
 
-.history__list {
+.search-history__list {
   list-style: none;
 }
 
-.history__item {
+.search-history__item {
   padding: 1rem 2rem;
   border: 2px solid plum;
   border-radius: 5px;
@@ -231,13 +231,13 @@ html {
   transition: .5s;
 }
 
-.history__item:hover {
+.search-history__item:hover {
   background-color: pink;
   cursor: pointer;
 }
 
-.history__empty {
+.search-history__empty {
   font-size: 2rem;
   color: blueviolet;
 }
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=styles.css.map */

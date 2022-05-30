@@ -6,47 +6,47 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="Sass/main.css">
+    <link rel="stylesheet" href="Sass/styles.css">
     <script defer src="script.js"></script>
 </head>
 
-<body class="body">
+<body>
     <nav class="menu">
         <h1 class="menu__header">
             WeatherApp
         </h1>
     </nav>
-    <div class="form">
-        <form class="form__wrap">
-            <input class="form__input" type="text" placeholder="Type city">
-            <button class="form__btn">
+    <div class="search-form">
+        <form class="search-form__wrap">
+            <input class="search-form__input" type="text" placeholder="Type city">
+            <button class="search-form__btn">
                 search
             </button>
         </form>
     </div>
-    <main class="content">
-        <div class="content__box">
-            <div class="content__current">
-                <img class="content__sun">
-                <div class="content__data">
-                    <h2 class="content__city">
+    <main class="weather">
+        <div class="weather__box">
+            <div class="weather__current">
+                <img class="weather__sun">
+                <div class="weather__data">
+                    <h2 class="weather__city">
                     </h2>
-                    <div class="content__day">
+                    <div class="weather__day">
                     </div>
-                    <div class="content__time">
+                    <div class="weather__time">
                     </div>
-                    <h3 class="content__temp">
+                    <h3 class="weather__temp">
                     </h3>
-                    <div class="content__sky">
+                    <div class="weather__sky">
                     </div>
                 </div>
             </div>
-            <div class="history">
-                <h3 class="history__header">
+            <div class="search-history">
+                <h3 class="search-history__header">
                     Search history
                 </h3>
-                <ul class="history__list">
-                    <h4 class="history__empty">
+                <ul class="search-history__list">
+                    <h4 class="search-history__empty">
                         No history yet!
                     </h4>
                 </ul>

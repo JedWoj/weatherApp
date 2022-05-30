@@ -1,23 +1,22 @@
-const form = document.querySelector('.form');
-const input = document.querySelector('.form__input');
-const cityAndDate = document.querySelector('.content__city'); 
-const weekday = document.querySelector('.content__day');
-const hour = document.querySelector('.content__time');
-const temperature = document.querySelector('.content__temp');
-const sky = document.querySelector('.content__sky');
-const icon = document.querySelector('.content__sun');
+(() => {
+const form = document.querySelector('.search-form');
+const input = document.querySelector('.search-form__input');
+const cityAndDate = document.querySelector('.weather__city'); 
+const weekday = document.querySelector('.weather__day');
+const hour = document.querySelector('.weather__time');
+const temperature = document.querySelector('.weather__temp');
+const sky = document.querySelector('.weather__sky');
+const icon = document.querySelector('.weather__sun');
 const errMessage = document.querySelector('.error');
-const historyContainer = document.querySelector('.history__list');
+const historyContainer = document.querySelector('.search-history__list');
 const forecastDays = [...document.querySelectorAll('.forecast__day')];
-const KEY = '25c0f427c1b94f7ea55225510222705';
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const renderHistory = function(searchHistory) {
-    if(searchHistory === null) return
+    if (searchHistory === null) return
     historyContainer.innerHTML = '';
     searchHistory.forEach(search => {
         const li = document.createElement('li');
-        li.classList.add('history__item');
+        li.classList.add('search-history__item');
         li.textContent = search;
         historyContainer.appendChild(li);
     });
@@ -25,10 +24,10 @@ const renderHistory = function(searchHistory) {
 
 const addToHistory = function(data) {
     let searchHistory = [];
-    if(localStorage.getItem('history')) {
+    if (localStorage.getItem('history')) {
         searchHistory = JSON.parse(localStorage.getItem('history'));
         
-        if(searchHistory.length === 5) {
+        if (searchHistory.length === 5) {
             searchHistory.pop();
             searchHistory.unshift(data.location.name);
         } else {
@@ -41,13 +40,8 @@ const addToHistory = function(data) {
     renderHistory(searchHistory);
 }
 
-const errMessageHandler = function(boolen) {
-    if(boolen) return errMessage.classList.add('hidden');
-    errMessage.classList.remove('hidden');
-}
-
-const errorMessage = function(err) {
-    errMessage.textContent = err;
+const errMessageHandler = function(shouldShowError) {
+    shouldShowError ? errMessage.classList.add('hidden') : errMessage.classList.remove('hidden');
 }
 
 const getInitialForecast = async function(lat,lng) {
@@ -57,6 +51,7 @@ const getInitialForecast = async function(lat,lng) {
 }
 
 const weekDay = function(string) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date = new Date(string);
     return `${days[date.getDay()]}`;
 }
@@ -82,10 +77,9 @@ const getInitialWeather = async function(lat,lng) {
     setWeather(data);
 }
 
-const userData = function() {
+const getUserData = function() {
     navigator.geolocation.getCurrentPosition((pos) => {
-        const latitude = pos.coords.latitude;
-        const longitude = pos.coords.longitude;
+        const {latitude, longitude} = pos.coords;
         getInitialWeather(latitude,longitude);
         getInitialForecast(latitude,longitude);
     }, () => {
@@ -94,11 +88,6 @@ const userData = function() {
         getInitialWeather(latitude,longitude);
         getInitialForecast(latitude,longitude);
     });
-}
-
-const getDayName = function(string) {
-    const date = new Date(string);
-    return days[date.getDay()];
 }
 
 const getDate = function(string) {
@@ -110,12 +99,13 @@ const getDate = function(string) {
 const setWeather = function(data) {
     const time = data.location.localtime.split(' ').splice(1,2);
     const [dayName] = data.location.localtime.split(' ').splice(0,1);
-    cityAndDate.textContent = `${data.location.name}, ${getDate(dayName)}`;
-    weekday.textContent = `${getDayName(dayName)}`;
+    const {current, location} = data;
+    cityAndDate.textContent = `${location.name}, ${getDate(dayName)}`;
+    weekday.textContent = `${weekDay(dayName)}`;
     hour.textContent = `${time}`;
-    temperature.textContent = `${data.current.temp_c} C`;
-    sky.textContent = `${data.current.condition.text}`;
-    icon.src = `${data.current.condition.icon}`;
+    temperature.textContent = `${current.temp_c} C`;
+    sky.textContent = `${current.condition.text}`;
+    icon.src = `${current.condition.icon}`;
     input.value = '';
 }
 
@@ -123,19 +113,19 @@ const getWeather = async function(value) {
     try {
     const response = await fetch(`http://api.weatherapi.com/v1/current.json?key=${KEY}&q=${value}`);
     const data = await response.json();
-    if(data.error) throw Error(data.error.message);
+    if (data.error) throw Error(data.error.message);
     setWeather(data);
     addToHistory(data);
     errMessageHandler(true);
     } catch(err) {
-        errorMessage(err);
+        errMessage.textContent = err;
         errMessageHandler(false);
     }
 }
 
 const checkInput = function() {
-    const value = input.value;
-    if(!value) return 
+    const {value} = input;
+    if (!value) return 
     getWeather(value);
     getForecast(value);
 }
@@ -147,14 +137,15 @@ form.addEventListener('submit', function(e) {
 
 historyContainer.addEventListener('click', (e) => {
     const target = e.target.closest('li');
-    if(target === null) return
+    if (target === null) return
     getWeather(target.textContent);
     getForecast(target.textContent);
 })
 
 const init = function() {
-    userData();
-    renderHistory(JSON.parse(localStorage.getItem('history')) || null);
+    getUserData();
+    renderHistory(JSON.parse(localStorage.getItem('history')));
 }
 
 init();
+})();
