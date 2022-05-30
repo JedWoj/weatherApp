@@ -13,7 +13,7 @@ const KEY = '25c0f427c1b94f7ea55225510222705';
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const renderHistory = function(searchHistory) {
-    if(searchHistory === null) return; 
+    if(searchHistory === null) return
     historyContainer.innerHTML = '';
     searchHistory.forEach(search => {
         const li = document.createElement('li');

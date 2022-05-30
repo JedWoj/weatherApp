@@ -1,4 +1,7 @@
 .history {
+    @media only screen and(max-width: 50rem) {
+        display: none;
+    }
 
     &__header {
         font-size: 2.2rem;
