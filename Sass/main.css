@@ -91,6 +91,13 @@ html {
   margin-bottom: 2rem;
 }
 
+.content__box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15rem;
+}
+
 .form__wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -191,5 +198,30 @@ html {
 
 .hidden {
   opacity: 0;
+}
+
+.history__header {
+  font-size: 2.2rem;
+  color: whitesmoke;
+  margin-bottom: 1rem;
+}
+
+.history__list {
+  list-style: none;
+}
+
+.history__item {
+  padding: 1rem 2rem;
+  border: 2px solid plum;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  color: whitesmoke;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.history__empty {
+  font-size: 2rem;
+  color: blueviolet;
 }
 /*# sourceMappingURL=main.css.map */

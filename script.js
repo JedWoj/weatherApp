@@ -7,9 +7,39 @@ const temperature = document.querySelector('.content__temp');
 const sky = document.querySelector('.content__sky');
 const icon = document.querySelector('.content__sun');
 const errMessage = document.querySelector('.error');
+const historyContainer = document.querySelector('.history__list');
 const forecastDays = [...document.querySelectorAll('.forecast__day')];
 const KEY = '25c0f427c1b94f7ea55225510222705';
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+const renderHistory = function(searchHistory) {
+    if(searchHistory === null) return; 
+    historyContainer.innerHTML = '';
+    searchHistory.forEach(search => {
+        const li = document.createElement('li');
+        li.classList.add('history__item');
+        li.textContent = search;
+        historyContainer.appendChild(li);
+    });
+}
+
+const addToHistory = function(data) {
+    let searchHistory = [];
+    if(localStorage.getItem('history')) {
+        searchHistory = JSON.parse(localStorage.getItem('history'));
+        
+        if(searchHistory.length === 5) {
+            searchHistory.pop();
+            searchHistory.unshift(data.location.name);
+        } else {
+            searchHistory.unshift(data.location.name);
+        }
+    } else {
+        searchHistory.unshift(data.location.name);
+    }
+    localStorage.setItem('history', JSON.stringify(searchHistory));
+    renderHistory(searchHistory);
+}
 
 const errMessageHandler = function(boolen) {
     if(boolen) return errMessage.classList.add('hidden');
@@ -86,6 +116,7 @@ const setWeather = function(data) {
     temperature.textContent = `${data.current.temp_c} C`;
     sky.textContent = `${data.current.condition.text}`;
     icon.src = `${data.current.condition.icon}`;
+    input.value = '';
 }
 
 const getWeather = async function(value) {
@@ -94,6 +125,7 @@ const getWeather = async function(value) {
     const data = await response.json();
     if(data.error) throw Error(data.error.message);
     setWeather(data);
+    addToHistory(data);
     errMessageHandler(true);
     } catch(err) {
         errorMessage(err);
@@ -113,4 +145,9 @@ form.addEventListener('submit', function(e) {
     checkInput();
 });
 
-userData();
+const init = function() {
+    userData();
+    renderHistory(JSON.parse(localStorage.getItem('history')) || null);
+}
+
+init();

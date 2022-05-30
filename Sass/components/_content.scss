@@ -42,4 +42,9 @@
     &__sky {
         margin-bottom: 2rem;
     }
+
+    &__box {
+        display: flex;
+        gap: 15rem;
+    }
 }

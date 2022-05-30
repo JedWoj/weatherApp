@@ -1,0 +1,27 @@
+.history {
+
+    &__header {
+        font-size: 2.2rem;
+        color: whitesmoke;
+        margin-bottom: 1rem;
+    }
+
+    &__list {
+        list-style: none;
+    }
+
+    &__item {
+        padding: 1rem 2rem;
+        border: 2px solid plum;
+        border-radius: 5px;
+        font-size: 1.6rem;
+        color: whitesmoke;
+        text-align: center;
+        margin-top: 5px;
+    }
+
+    &__empty {
+        font-size: 2rem;
+        color: blueviolet;
+    }
+}
