@@ -218,6 +218,13 @@ html {
   color: whitesmoke;
   text-align: center;
   margin-top: 5px;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.history__item:hover {
+  background-color: pink;
+  cursor: pointer;
 }
 
 .history__empty {

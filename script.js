@@ -145,6 +145,13 @@ form.addEventListener('submit', function(e) {
     checkInput();
 });
 
+historyContainer.addEventListener('click', (e) => {
+    const target = e.target.closest('li');
+    if(target === null) return
+    getWeather(target.textContent);
+    getForecast(target.textContent);
+})
+
 const init = function() {
     userData();
     renderHistory(JSON.parse(localStorage.getItem('history')) || null);

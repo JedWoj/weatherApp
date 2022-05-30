@@ -18,6 +18,12 @@
         color: whitesmoke;
         text-align: center;
         margin-top: 5px;
+        transition: .5s;
+
+        &:hover {
+            background-color: pink;
+            cursor: pointer;
+        }
     }
 
     &__empty {
